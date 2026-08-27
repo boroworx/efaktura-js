@@ -14,7 +14,7 @@
     "pdv"
   ],
   "engines": {
-    "node": ">=18"
+    "node": ">=20.3"
   },
   "exports": {
     ".": {

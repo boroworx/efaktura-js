@@ -14,7 +14,7 @@ hero:
       link: /vodici/izlazne-fakture
     - theme: alt
       text: GitHub
-      link: https://github.com/efaktura-js/efaktura-js
+      link: https://github.com/boroworx/efaktura-js
 
 features:
   - title: Potpuna pokrivenost API-ja

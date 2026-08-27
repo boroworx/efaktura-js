@@ -3,7 +3,7 @@
 ## Pokretanje
 
 ```sh
-git clone https://github.com/efaktura-js/efaktura-js
+git clone https://github.com/boroworx/efaktura-js
 cd efaktura-js
 npm install
 npm test

@@ -353,7 +353,7 @@ fakturu.
 
 ## Dokumentacija
 
-Potpuna dokumentacija: **[efaktura-js dokumentacija](https://efaktura-js.github.io/efaktura-js/)**
+Potpuna dokumentacija: **[efaktura-js dokumentacija](https://boroworx.github.io/efaktura-js/)**
 
 ## Licenca
 

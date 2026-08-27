@@ -104,7 +104,7 @@ export default defineConfig({
       },
     ],
 
-    socialLinks: [{ icon: 'github', link: 'https://github.com/efaktura-js/efaktura-js' }],
+    socialLinks: [{ icon: 'github', link: 'https://github.com/boroworx/efaktura-js' }],
 
     footer: {
       message:
