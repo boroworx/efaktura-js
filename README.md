@@ -1,5 +1,10 @@
 # efaktura-js
 
+[![npm](https://img.shields.io/npm/v/efaktura-js)](https://www.npmjs.com/package/efaktura-js)
+[![provere](https://img.shields.io/github/actions/workflow/status/boroworx/efaktura-js/docs.yml?branch=main&label=provere)](https://github.com/boroworx/efaktura-js/actions/workflows/docs.yml)
+[![node](https://img.shields.io/node/v/efaktura-js)](https://nodejs.org/)
+[![licenca](https://img.shields.io/npm/l/efaktura-js?label=licenca)](https://github.com/boroworx/efaktura-js/blob/main/LICENSE)
+
 JavaScript i TypeScript klijent za **eFakturu (SEF)** – Sistem elektronskih faktura
 Republike Srbije ([efaktura.gov.rs](https://www.efaktura.gov.rs/)).
 
