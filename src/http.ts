@@ -156,7 +156,7 @@ class RateLimiter {
   #tokens: number
   #refillPerMs: number
   #last = Date.now()
-  #queue: Array<() => void> = []
+  #queue: Array<{ resolve: () => void; cancelled: boolean }> = []
   #draining = false
 
   constructor(perSecond: number) {
@@ -171,14 +171,29 @@ class RateLimiter {
     this.#last = now
   }
 
-  async acquire(): Promise<void> {
+  /**
+   * Wait for a slot. Passing the caller's signal lets a cancelled request give
+   * up its place instead of holding one: without it, an aborted request still
+   * waits its turn and spends a token, delaying live requests behind it.
+   */
+  async acquire(signal?: AbortSignal): Promise<void> {
+    if (signal?.aborted) throw signal.reason
     this.#refill()
     if (this.#tokens >= 1 && this.#queue.length === 0) {
       this.#tokens -= 1
       return
     }
-    await new Promise<void>((resolve) => {
-      this.#queue.push(resolve)
+    await new Promise<void>((resolve, reject) => {
+      const entry = { resolve, cancelled: false }
+      this.#queue.push(entry)
+      signal?.addEventListener(
+        'abort',
+        () => {
+          entry.cancelled = true
+          reject(signal.reason)
+        },
+        { once: true },
+      )
       this.#drain()
     })
   }
@@ -189,9 +204,14 @@ class RateLimiter {
     const step = () => {
       this.#refill()
       while (this.#tokens >= 1 && this.#queue.length) {
+        const entry = this.#queue.shift()!
+        // A cancelled waiter is dropped without spending its token.
+        if (entry.cancelled) continue
         this.#tokens -= 1
-        this.#queue.shift()!()
+        entry.resolve()
       }
+      // Trailing cancelled waiters would otherwise keep the timer alive.
+      while (this.#queue.length && this.#queue[0]!.cancelled) this.#queue.shift()
       if (this.#queue.length) {
         setTimeout(step, Math.ceil((1 - this.#tokens) / this.#refillPerMs) || 1)
       } else {
@@ -253,7 +273,7 @@ export class SefHttp {
       if (timeout > 0) signals.push(AbortSignal.timeout(timeout))
       const signal = signals.length ? AbortSignal.any(signals) : undefined
 
-      await this.#limiter?.acquire()
+      await this.#limiter?.acquire(options.signal)
 
       let response: Response
       try {

@@ -42,16 +42,23 @@ export async function* mapConcurrent<T, R>(
   worker: (item: T, index: number) => Promise<R>,
 ): AsyncGenerator<R> {
   const size = Math.max(1, Math.min(limit, items.length))
-  if (size === 0) return
   const inFlight = new Map<number, Promise<R>>()
   let next = 0
-  for (let emit = 0; emit < items.length; emit++) {
-    while (next < items.length && inFlight.size < size) {
-      const i = next++
-      inFlight.set(i, worker(items[i] as T, i))
+
+  const start = (index: number) => {
+    const pending = worker(items[index] as T, index)
+    pending.catch(() => {})
+    inFlight.set(index, pending)
+  }
+
+  try {
+    for (let emit = 0; emit < items.length; emit++) {
+      while (next < items.length && inFlight.size < size) start(next++)
+      const pending = inFlight.get(emit)!
+      inFlight.delete(emit)
+      yield await pending
     }
-    const pending = inFlight.get(emit)!
-    inFlight.delete(emit)
-    yield await pending
+  } finally {
+    inFlight.clear()
   }
 }

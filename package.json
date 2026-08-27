@@ -1,6 +1,6 @@
 {
   "name": "efaktura-js",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "API klijent za eFakturu (SEF)",
   "keywords": [
     "efaktura",
@@ -36,7 +36,8 @@
     }
   },
   "files": [
-    "dist"
+    "dist",
+    "CHANGELOG.md"
   ],
   "scripts": {
     "generate": "node scripts/generate.mjs",
