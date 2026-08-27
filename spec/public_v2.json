@@ -1,0 +1,1928 @@
+{
+  "openapi": "3.0.4",
+  "info": {
+    "title": "Public API v2",
+    "version": "public_v2"
+  },
+  "paths": {
+    "/api/v2/publicApi/vat-recording/group": {
+      "post": {
+        "tags": [
+          "PublicApiV2"
+        ],
+        "summary": "Record group vat",
+        "parameters": [
+          {
+            "name": "ApiKey",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GroupVatRecordDto"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/GroupVatRecordDto"
+              }
+            },
+            "text/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/GroupVatRecordDto"
+              }
+            },
+            "application/*+xml": {
+              "schema": {
+                "$ref": "#/components/schemas/GroupVatRecordDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GroupVatRecordResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GroupVatRecordResponseDto"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/GroupVatRecordResponseDto"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/GroupVatRecordResponseDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "PublicApiV2"
+        ],
+        "summary": "Get group vat records and filter old records by last modified date and new ones by status change date",
+        "parameters": [
+          {
+            "name": "ApiKey",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dateFrom",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "dateTo",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GroupVatRecordResponseDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GroupVatRecordResponseDto"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GroupVatRecordResponseDto"
+                  }
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GroupVatRecordResponseDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/publicApi/vat-recording/group/correction/{groupVatId}": {
+      "post": {
+        "tags": [
+          "PublicApiV2"
+        ],
+        "summary": "Do a correction for previous group vat record",
+        "parameters": [
+          {
+            "name": "ApiKey",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "groupVatId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GroupVatRecordDto"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/GroupVatRecordDto"
+              }
+            },
+            "text/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/GroupVatRecordDto"
+              }
+            },
+            "application/*+xml": {
+              "schema": {
+                "$ref": "#/components/schemas/GroupVatRecordDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GroupVatRecordResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GroupVatRecordResponseDto"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/GroupVatRecordResponseDto"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/GroupVatRecordResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/publicApi/vat-recording/group/cancel/{groupVatId}": {
+      "post": {
+        "tags": [
+          "PublicApiV2"
+        ],
+        "summary": "Cancel all versions of group vat record",
+        "parameters": [
+          {
+            "name": "ApiKey",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "groupVatId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/publicApi/vat-recording/group/{groupVatId}": {
+      "get": {
+        "tags": [
+          "PublicApiV2"
+        ],
+        "summary": "Get group vat record by id",
+        "parameters": [
+          {
+            "name": "ApiKey",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "groupVatId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GroupVatRecordResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GroupVatRecordResponseDto"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/GroupVatRecordResponseDto"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/GroupVatRecordResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/publicApi/vat-recording/group/{groupVatId}/pdf": {
+      "get": {
+        "tags": [
+          "PublicApiV2"
+        ],
+        "summary": "Get group vat record pdf by id",
+        "parameters": [
+          {
+            "name": "ApiKey",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "groupVatId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v2/publicApi/vat-recording/individual": {
+      "post": {
+        "tags": [
+          "PublicApiV2"
+        ],
+        "summary": "Record individual vat",
+        "parameters": [
+          {
+            "name": "ApiKey",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IndividualVatRecordDto"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/IndividualVatRecordDto"
+              }
+            },
+            "text/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/IndividualVatRecordDto"
+              }
+            },
+            "application/*+xml": {
+              "schema": {
+                "$ref": "#/components/schemas/IndividualVatRecordDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/IndividualVatRecordResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IndividualVatRecordResponseDto"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/IndividualVatRecordResponseDto"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/IndividualVatRecordResponseDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "PublicApiV2"
+        ],
+        "summary": "Get individual vat records and filter old records by last modified date and new ones by status change date",
+        "parameters": [
+          {
+            "name": "ApiKey",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dateFrom",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "dateTo",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/IndividualVatRecordListItemDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/IndividualVatRecordListItemDto"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/IndividualVatRecordListItemDto"
+                  }
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/IndividualVatRecordListItemDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/publicApi/vat-recording/individual/correction/{individualVatId}": {
+      "post": {
+        "tags": [
+          "PublicApiV2"
+        ],
+        "summary": "Do a correction for previous individual vat record",
+        "parameters": [
+          {
+            "name": "ApiKey",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "individualVatId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IndividualVatRecordDto"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/IndividualVatRecordDto"
+              }
+            },
+            "text/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/IndividualVatRecordDto"
+              }
+            },
+            "application/*+xml": {
+              "schema": {
+                "$ref": "#/components/schemas/IndividualVatRecordDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/IndividualVatRecordResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IndividualVatRecordResponseDto"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/IndividualVatRecordResponseDto"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/IndividualVatRecordResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/publicApi/vat-recording/individual/cancel/{individualVatId}": {
+      "post": {
+        "tags": [
+          "PublicApiV2"
+        ],
+        "summary": "Cancel all versions of individual vat record",
+        "parameters": [
+          {
+            "name": "ApiKey",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "individualVatId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/publicApi/vat-recording/individual/{individualVatId}": {
+      "get": {
+        "tags": [
+          "PublicApiV2"
+        ],
+        "summary": "Get individual vat record by id",
+        "parameters": [
+          {
+            "name": "ApiKey",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "individualVatId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/IndividualVatRecordResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IndividualVatRecordResponseDto"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/IndividualVatRecordResponseDto"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/IndividualVatRecordResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/publicApi/vat-recording/individual/{individualVatId}/pdf": {
+      "get": {
+        "tags": [
+          "PublicApiV2"
+        ],
+        "summary": "Download individual vat record pdf by id",
+        "parameters": [
+          {
+            "name": "ApiKey",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "individualVatId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ExtendedGroupVatRecordTurnoverDto": {
+        "type": "object",
+        "properties": {
+          "increaseBaseAmount20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "increaseVat20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "increaseBaseAmount10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "increaseVat10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "reductionBaseAmount20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "reductionVat20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "reductionBaseAmount10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "reductionVat10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "prepaymentReductionBaseAmount20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "prepaymentReductionVat20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "prepaymentReductionBaseAmount10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "prepaymentReductionVat10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "prepaymentIncreaseBaseAmount20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "prepaymentIncreaseVat20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "prepaymentIncreaseBaseAmount10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "prepaymentIncreaseVat10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ExtendedGroupVatRecordTurnoverResponseDto": {
+        "type": "object",
+        "properties": {
+          "vatTurnoverId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "increaseBaseAmount20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "increaseVat20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "increaseBaseAmount10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "increaseVat10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "reductionBaseAmount20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "reductionVat20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "reductionBaseAmount10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "reductionVat10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "prepaymentReductionBaseAmount20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "prepaymentReductionVat20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "prepaymentReductionBaseAmount10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "prepaymentReductionVat10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "prepaymentIncreaseBaseAmount20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "prepaymentIncreaseVat20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "prepaymentIncreaseBaseAmount10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "prepaymentIncreaseVat10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GroupVatRecordDto": {
+        "type": "object",
+        "properties": {
+          "year": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "calculationNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "vatPeriod": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "prepaymentAmount20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "prepaymentBaseAmount20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "prepaymentCalculatedVat20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "prepaymentAmount10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "prepaymentBaseAmount10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "prepaymentCalculatedVat10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "baseAmount20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "calculatedVat20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "baseAmount10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "calculatedVat10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "noChargeBaseAmount20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "noChargeCalculatedVat20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "noChargeBaseAmount10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "noChargeCalculatedVat10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "touristServicesBaseAmount20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "touristServicesCalculatedVat20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "prepaymentTouristServicesBaseAmount20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "prepaymentTouristServicesCalculatedVat20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "artAntiquesCollectibleGoodsBaseAmount20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "artAntiquesCollectibleGoodsCalculatedVat20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "artAntiquesCollectibleGoodsBaseAmount10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "artAntiquesCollectibleGoodsCalculatedVat10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "prepaymentArtAntiquesCollectibleGoodsBaseAmount20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "prepaymentArtAntiquesCollectibleGoodsCalculatedVat20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "prepaymentArtAntiquesCollectibleGoodsBaseAmount10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "prepaymentArtAntiquesCollectibleGoodsCalculatedVat10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "supplierTaxDebtorTurnover": {
+            "$ref": "#/components/schemas/GroupVatRecordTurnoverDto"
+          },
+          "receiverTaxDebtorTurnover": {
+            "$ref": "#/components/schemas/GroupVatRecordTurnoverDto"
+          },
+          "stornoSupplierTaxDebtorTurnover": {
+            "$ref": "#/components/schemas/ExtendedGroupVatRecordTurnoverDto"
+          },
+          "stornoReceiverTaxDebtorTurnover": {
+            "$ref": "#/components/schemas/ExtendedGroupVatRecordTurnoverDto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GroupVatRecordResponseDto": {
+        "type": "object",
+        "properties": {
+          "year": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "calculationNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "vatPeriod": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "prepaymentAmount20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "prepaymentBaseAmount20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "prepaymentCalculatedVat20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "prepaymentAmount10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "prepaymentBaseAmount10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "prepaymentCalculatedVat10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "baseAmount20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "calculatedVat20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "baseAmount10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "calculatedVat10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "noChargeBaseAmount20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "noChargeCalculatedVat20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "noChargeBaseAmount10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "noChargeCalculatedVat10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "touristServicesBaseAmount20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "touristServicesCalculatedVat20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "prepaymentTouristServicesBaseAmount20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "prepaymentTouristServicesCalculatedVat20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "artAntiquesCollectibleGoodsBaseAmount20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "artAntiquesCollectibleGoodsCalculatedVat20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "artAntiquesCollectibleGoodsBaseAmount10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "artAntiquesCollectibleGoodsCalculatedVat10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "prepaymentArtAntiquesCollectibleGoodsBaseAmount20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "prepaymentArtAntiquesCollectibleGoodsCalculatedVat20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "prepaymentArtAntiquesCollectibleGoodsBaseAmount10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "prepaymentArtAntiquesCollectibleGoodsCalculatedVat10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "groupVatId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "recordingDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "vatRecordingStatus": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "statusChangeDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "supplierTaxDebtorTurnover": {
+            "$ref": "#/components/schemas/GroupVatRecordTurnoverResponseDto"
+          },
+          "receiverTaxDebtorTurnover": {
+            "$ref": "#/components/schemas/GroupVatRecordTurnoverResponseDto"
+          },
+          "stornoSupplierTaxDebtorTurnover": {
+            "$ref": "#/components/schemas/ExtendedGroupVatRecordTurnoverResponseDto"
+          },
+          "stornoReceiverTaxDebtorTurnover": {
+            "$ref": "#/components/schemas/ExtendedGroupVatRecordTurnoverResponseDto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GroupVatRecordTurnoverDto": {
+        "type": "object",
+        "properties": {
+          "increaseBaseAmount20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "increaseVat20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "increaseBaseAmount10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "increaseVat10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "reductionBaseAmount20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "reductionVat20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "reductionBaseAmount10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "reductionVat10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "prepaymentReductionBaseAmount20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "prepaymentReductionVat20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "prepaymentReductionBaseAmount10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "prepaymentReductionVat10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GroupVatRecordTurnoverResponseDto": {
+        "type": "object",
+        "properties": {
+          "vatTurnoverId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "increaseBaseAmount20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "increaseVat20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "increaseBaseAmount10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "increaseVat10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "reductionBaseAmount20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "reductionVat20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "reductionBaseAmount10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "reductionVat10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "prepaymentReductionBaseAmount20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "prepaymentReductionVat20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "prepaymentReductionBaseAmount10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "prepaymentReductionVat10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "IndividualVatRecordDto": {
+        "type": "object",
+        "properties": {
+          "year": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "calculationNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "documentNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "vatPeriod": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "documentDirection": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "documentType": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "internalInvoiceOption": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "relatedPartyIdentifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "noRealEstateDescription10": {
+            "type": "string",
+            "nullable": true
+          },
+          "noRealEstateBaseAmount10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "noRealEstateCalculatedVat10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "noRealEstateDescription20": {
+            "type": "string",
+            "nullable": true
+          },
+          "noRealEstateBaseAmount20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "noRealEstateCalculatedVat20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "noChargeNoRealEstateDescription10": {
+            "type": "string",
+            "nullable": true
+          },
+          "noChargeNoRealEstateBaseAmount10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "noChargeNoRealEstateCalculatedVat10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "noChargeNoRealEstateDescription20": {
+            "type": "string",
+            "nullable": true
+          },
+          "noChargeNoRealEstateBaseAmount20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "noChargeNoRealEstateCalculatedVat20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "realEstateDescription10": {
+            "type": "string",
+            "nullable": true
+          },
+          "realEstateBaseAmount10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "realEstateCalculatedVat10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "realEstateDescription20": {
+            "type": "string",
+            "nullable": true
+          },
+          "realEstateBaseAmount20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "realEstateCalculatedVat20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "noChargeRealEstateDescription10": {
+            "type": "string",
+            "nullable": true
+          },
+          "noChargeRealEstateBaseAmount10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "noChargeRealEstateCalculatedVat10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "noChargeRealEstateDescription20": {
+            "type": "string",
+            "nullable": true
+          },
+          "noChargeRealEstateBaseAmount20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "noChargeRealEstateCalculatedVat20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "prepaymentDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "relatedInvoiceOption": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "relatedVatRecords": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RelatedIndividualVatRecordDto"
+            },
+            "nullable": true
+          },
+          "relatedInternalInvoiceOption": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "relatedVatRecordOutOfSystem": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "relatedInvoiceIssueDateFrom": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "relatedInvoiceIssueDateTo": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "internalInvoiceNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "basisForPrepayment": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "IndividualVatRecordListItemDto": {
+        "type": "object",
+        "properties": {
+          "individualVatId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "year": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "calculationNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "documentNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "recordingDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "vatPeriod": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "vatRecordingStatus": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "documentDirection": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "documentType": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "internalInvoiceOption": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "relatedPartyIdentifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "statusChangeDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "totalCalculatedVat": {
+            "type": "number",
+            "format": "double"
+          },
+          "prepaymentDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "relatedInvoiceOption": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "relatedInternalInvoiceOption": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "internalInvoiceNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "basisForPrepayment": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdUtc": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "IndividualVatRecordResponseDto": {
+        "type": "object",
+        "properties": {
+          "individualVatId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "vatRecordingStatus": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "statusChangeDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "year": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "calculationNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "documentNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "recordingDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "vatPeriod": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "documentDirection": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "documentType": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "internalInvoiceOption": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "relatedPartyIdentifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "registrationCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "vatRegistrationCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "noRealEstateDescription10": {
+            "type": "string",
+            "nullable": true
+          },
+          "noRealEstateBaseAmount10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "noRealEstateCalculatedVat10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "noRealEstateDescription20": {
+            "type": "string",
+            "nullable": true
+          },
+          "noRealEstateBaseAmount20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "noRealEstateCalculatedVat20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "noChargeNoRealEstateDescription10": {
+            "type": "string",
+            "nullable": true
+          },
+          "noChargeNoRealEstateBaseAmount10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "noChargeNoRealEstateCalculatedVat10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "noChargeNoRealEstateDescription20": {
+            "type": "string",
+            "nullable": true
+          },
+          "noChargeNoRealEstateBaseAmount20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "noChargeNoRealEstateCalculatedVat20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "realEstateDescription10": {
+            "type": "string",
+            "nullable": true
+          },
+          "realEstateBaseAmount10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "realEstateCalculatedVat10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "realEstateDescription20": {
+            "type": "string",
+            "nullable": true
+          },
+          "realEstateBaseAmount20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "realEstateCalculatedVat20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "noChargeRealEstateDescription10": {
+            "type": "string",
+            "nullable": true
+          },
+          "noChargeRealEstateBaseAmount10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "noChargeRealEstateCalculatedVat10": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "noChargeRealEstateDescription20": {
+            "type": "string",
+            "nullable": true
+          },
+          "noChargeRealEstateBaseAmount20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "noChargeRealEstateCalculatedVat20": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "totalCalculatedVat": {
+            "type": "number",
+            "format": "double"
+          },
+          "prepaymentDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "relatedInvoiceOption": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "relatedVatRecords": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RelatedIndividualVatRecordResponseDto"
+            },
+            "nullable": true
+          },
+          "relatedVatRecordOutOfSystem": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "relatedInvoiceIssueDateFrom": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "relatedInvoiceIssueDateTo": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "relatedInternalInvoiceOption": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "internalInvoiceNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "basisForPrepayment": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdUtc": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "RelatedIndividualVatRecordDto": {
+        "type": "object",
+        "properties": {
+          "documentNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "internalInvoiceNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "relatedIndividualVatRecordId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RelatedIndividualVatRecordResponseDto": {
+        "type": "object",
+        "properties": {
+          "relatedIndividualVatRecordId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "individualVatRecordId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "documentNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "internalInvoiceNumber": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}
