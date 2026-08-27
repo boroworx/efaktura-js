@@ -1,0 +1,78 @@
+name: Publish
+
+# Objavljivanje kreće kada se na GitHubu objavi Release.
+# Oznaka mora da se poklapa sa verzijom u package.json (v0.2.0 -> 0.2.0).
+on:
+  release:
+    types: [published]
+
+# id-token je neophodan za trusted publishing preko OIDC-a.
+# Bez njega npm pada nazad na autentifikaciju tokenom, koje ovde nema.
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Trusted publishing traži Node >= 22.14 i npm >= 11.5.1.
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+          cache: npm
+
+      # Verzija npm-a koja dolazi uz Node ume da bude starija od tražene,
+      # pa se osigurava izričito.
+      - name: Osiguraj npm >= 11.5.1
+        run: |
+          npm install -g npm@latest
+          npm --version
+
+      - run: npm ci
+
+      # Objavljivanje je nepovratno, pa se neslaganje oznake i verzije
+      # zaustavlja pre nego što išta ode na registry.
+      - name: Proveri da se oznaka poklapa sa verzijom
+        run: |
+          TAG="${GITHUB_REF_NAME#v}"
+          PKG="$(node -p "require('./package.json').version")"
+          echo "oznaka: $TAG   package.json: $PKG"
+          if [ "$TAG" != "$PKG" ]; then
+            echo "::error::Oznaka '$GITHUB_REF_NAME' ne odgovara verziji '$PKG' u package.json."
+            exit 1
+          fi
+
+      # Odbija ponovno objavljivanje verzije koja već postoji, umesto da
+      # padne tek na registry-ju.
+      - name: Proveri da verzija već nije objavljena
+        run: |
+          PKG="$(node -p "require('./package.json').version")"
+          if npm view "efaktura-js@$PKG" version >/dev/null 2>&1; then
+            echo "::error::Verzija $PKG je već objavljena na npm-u."
+            exit 1
+          fi
+
+      # Iste provere pokreće i prepublishOnly; ovde stoje zasebno da bi se u
+      # Actions prikazu videlo šta je tačno palo.
+      - run: npx tsc --noEmit
+      - run: npm test
+      - run: npm run lint:docs
+
+      # Bez --provenance: trusted publishing sam pravi i objavljuje potvrdu.
+      - name: Objavi na npm
+        run: npm publish
+
+      - name: Rezime
+        run: |
+          PKG="$(node -p "require('./package.json').version")"
+          {
+            echo "### Objavljeno :package:"
+            echo ""
+            echo "\`efaktura-js@$PKG\`"
+            echo ""
+            echo "https://www.npmjs.com/package/efaktura-js/v/$PKG"
+          } >> "$GITHUB_STEP_SUMMARY"
