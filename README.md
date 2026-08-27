@@ -189,6 +189,34 @@ const procitano = parseInvoiceXml(xml)
 Metoda `parseInvoiceXml()` prihvata i fakturu umotanu u element
 `<DocumentEnvelope>`, u kojem SEF vraća dokumenta zajedno s metapodacima.
 
+### Provera dokumenta pre slanja
+
+Metoda `inspectInvoice()` proverava dokument onako kako bi ga proverio SEF, ali
+bez slanja. Iznosi se ponovo računaju iz stavki i porede sa navedenima, pa se
+primenjuju pravila srpskog profila.
+
+```ts
+import { inspectInvoice } from 'efaktura-js/ubl'
+
+const nalaz = inspectInvoice(xml)
+
+if (!nalaz.ok) {
+  for (const stavka of nalaz.findings.filter((f) => f.severity === 'error')) {
+    console.error(stavka.code, stavka.message)
+  }
+  for (const razlika of nalaz.differences) {
+    console.error(`${razlika.field}: navedeno ${razlika.declared}, izračunato ${razlika.computed}`)
+  }
+  throw new Error('Dokument ne bi prošao proveru na SEF-u')
+}
+```
+
+Funkcija nikada ne baca izuzetak: i neispravan XML vraća se kao nalaz.
+
+Ista provera dostupna je i kao alatka u pregledaču, na stranici
+[Pregled UBL fakture](https://boroworx.github.io/efaktura-js/alatke/pregled-ubl).
+Dokument se pri tome ne šalje ni na jedan server.
+
 ### Iznosi nikada nisu decimalni brojevi u pokretnom zarezu
 
 Aritmetika nad iznosima izvodi se preko tipa `Decimal` zasnovanog na tipu

@@ -40,6 +40,7 @@ export default defineConfig({
       { text: 'Vodiči', link: '/vodici/izlazne-fakture' },
       { text: 'UBL', link: '/ubl/pregled' },
       { text: 'API referenca', link: '/api/klijent' },
+      { text: 'Alatke', link: '/alatke/pregled-ubl' },
       {
         text: 'npm',
         link: 'https://www.npmjs.com/package/efaktura-js',
@@ -80,6 +81,11 @@ export default defineConfig({
           { text: 'Iznosi i zaokruživanje', link: '/ubl/iznosi' },
           { text: 'Šifarnici', link: '/ubl/sifarnici' },
         ],
+      },
+      {
+        text: 'Alatke',
+        collapsed: false,
+        items: [{ text: 'Pregled UBL fakture', link: '/alatke/pregled-ubl' }],
       },
       {
         text: 'API referenca',

@@ -22,7 +22,7 @@ export type * from './generated/types.ts'
 // UBL layer. Also importable on its own via `efaktura-js/ubl` when you only need
 // to build or read documents.
 export {
-  buildInvoice, buildInvoiceXml, computeTotals, parseInvoiceXml,
+  buildInvoice, buildInvoiceXml, computeTotals, parseInvoiceXml, inspectInvoice,
   CUSTOMIZATION_ID, NS,
   TAX_CATEGORY, INVOICE_TYPE_CODE, PAYMENT_MEANS, UNIT,
   DOCUMENT_REFERENCE_TYPE, SERBIA_ENDPOINT_SCHEME,
@@ -33,6 +33,7 @@ export type {
   Invoice, InvoiceLineInput, Party, Address, PaymentInput,
   DocumentReferenceInput, PrepaymentInput, AttachmentInput,
   InvoiceTotals, TaxSubtotal, ParsedInvoice,
+  Inspection, Finding, Severity, AmountDifference,
   TaxCategoryCode, DocumentTypeName,
 } from './ubl/index.ts'
 

@@ -1,5 +1,6 @@
 export * from './build.ts'
 export * from './parse.ts'
+export * from './inspect.ts'
 export * from './codes.ts'
 export { Decimal, dec, sum } from './decimal.ts'
 export {
