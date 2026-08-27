@@ -1,9 +1,7 @@
 {
   "name": "efaktura-js",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "API klijent za eFakturu (SEF)",
-  "type": "module",
-  "license": "MIT",
   "keywords": [
     "efaktura",
     "sef",
@@ -13,6 +11,17 @@
     "en16931",
     "pdv"
   ],
+  "homepage": "https://boroworx.github.io/efaktura-js/",
+  "bugs": {
+    "url": "https://github.com/boroworx/efaktura-js/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/boroworx/efaktura-js.git"
+  },
+  "license": "MIT",
+  "author": "Marko Borojević",
+  "type": "module",
   "engines": {
     "node": ">=20.3"
   },
@@ -27,8 +36,7 @@
     }
   },
   "files": [
-    "dist",
-    "spec"
+    "dist"
   ],
   "scripts": {
     "generate": "node scripts/generate.mjs",
@@ -36,7 +44,7 @@
     "build": "tsc -p tsconfig.json",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "node --test test/*.test.ts",
-    "prepublishOnly": "npm run build",
+    "prepublishOnly": "npm run typecheck && npm test && npm run build",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs",
